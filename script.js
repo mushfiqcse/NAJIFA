@@ -149,6 +149,31 @@ function startBubbleAnimation() {
   }, 500); // Create new bubble every 0.5 seconds
 }
 
+// Audio controls
+const bgMusic = document.getElementById('bgMusic');
+const musicToggle = document.getElementById('musicToggle');
+let isMusicPlaying = false;
+
+musicToggle.addEventListener('click', () => {
+  if (isMusicPlaying) {
+    bgMusic.pause();
+    musicToggle.classList.remove('playing');
+  } else {
+    bgMusic.play();
+    musicToggle.classList.add('playing');
+  }
+  isMusicPlaying = !isMusicPlaying;
+});
+
+// Play music on first interaction with the page
+document.addEventListener('click', () => {
+  if (!isMusicPlaying) {
+    bgMusic.play();
+    musicToggle.classList.add('playing');
+    isMusicPlaying = true;
+  }
+}, { once: true });
+
 // Start animations immediately
 animateHearts();
 startBubbleAnimation();
