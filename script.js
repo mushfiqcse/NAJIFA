@@ -114,16 +114,13 @@ function createBubble(message) {
   const basePosition = (column * 25) + Math.random() * 20; // More space between columns
   bubble.style.left = basePosition + '%';
   
-  // Variable font sizes - mix of small and big
-  const isBigText = Math.random() > 0.7; // 30% chance of big text
-  const fontSize = isBigText ? 
-    Math.random() * 20 + 25 : // 25-45px for big text
-    Math.random() * 8 + 14;   // 14-22px for normal text
+  // Completely random font sizes between 12px and 48px
+  const fontSize = Math.random() * 36 + 12; // 12-48px random size
   bubble.style.fontSize = `${fontSize}px`;
   
-  // Soft, romantic colors
+  // Simple colors without glow
   const hue = Math.random() * 40 + 330; // 330-370 (pink to red)
-  const lightness = Math.random() * 25 + 65; // 65-90% lightness
+  const lightness = Math.random() * 20 + 75; // 75-95% lightness for better visibility
   bubble.style.color = `hsl(${hue}, 100%, ${lightness}%)`;
   
   // Slower animation for less density
