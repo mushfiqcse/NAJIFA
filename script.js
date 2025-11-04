@@ -109,21 +109,25 @@ function createBubble(message) {
   bubble.className = 'bubble';
   bubble.innerHTML = '❤️ ' + message + ' ❤️';
   
-  // Improved positioning with 5 columns for more messages
-  const column = Math.floor(Math.random() * 5); // 5 columns
-  const basePosition = (column * 20) + Math.random() * 15; // Base position with some randomness
+  // More spread out positioning with 4 columns
+  const column = Math.floor(Math.random() * 4); // 4 columns
+  const basePosition = (column * 25) + Math.random() * 20; // More space between columns
   bubble.style.left = basePosition + '%';
   
-  // Consistent, readable font size
-  bubble.style.fontSize = `${Math.random() * 6 + 16}px`; // 16px to 22px
+  // Variable font sizes - mix of small and big
+  const isBigText = Math.random() > 0.7; // 30% chance of big text
+  const fontSize = isBigText ? 
+    Math.random() * 20 + 25 : // 25-45px for big text
+    Math.random() * 8 + 14;   // 14-22px for normal text
+  bubble.style.fontSize = `${fontSize}px`;
   
-  // Soft, romantic colors with more variety
-  const hue = Math.random() * 50 + 320; // 320-370 (purple to red)
-  const lightness = Math.random() * 20 + 70; // 70-90% lightness
+  // Soft, romantic colors
+  const hue = Math.random() * 40 + 330; // 330-370 (pink to red)
+  const lightness = Math.random() * 25 + 65; // 65-90% lightness
   bubble.style.color = `hsl(${hue}, 100%, ${lightness}%)`;
   
-  // Faster animation for more frequent appearance
-  const duration = Math.random() * 5 + 12; // 12-17 seconds
+  // Slower animation for less density
+  const duration = Math.random() * 8 + 15; // 15-23 seconds
   bubble.style.animationDuration = `${duration}s`;
   
   loveBubbles.appendChild(bubble);
@@ -135,23 +139,23 @@ function createBubble(message) {
 
 // Function to continuously create bubbles
 function startBubbleAnimation() {
-  // Create initial set of bubbles rapidly
+  // Create initial set of bubbles with more spacing
   messages.forEach((msg, index) => {
-    setTimeout(() => createBubble(msg), index * 800); // Faster initial spread
+    setTimeout(() => createBubble(msg), index * 1200); // Slower initial spread
   });
 
-  // Create bubbles more frequently
+  // Create bubbles less frequently
   setInterval(() => {
     const unusedMessages = [...messages];
-    // Create 4 bubbles at different positions
-    for(let i = 0; i < 4; i++) {
+    // Create 2 bubbles at different positions
+    for(let i = 0; i < 2; i++) {
       if(unusedMessages.length > 0) {
         const randomIndex = Math.floor(Math.random() * unusedMessages.length);
         const message = unusedMessages.splice(randomIndex, 1)[0];
-        setTimeout(() => createBubble(message), i * 300); // Reduced delay between bubbles
+        setTimeout(() => createBubble(message), i * 800); // More delay between bubbles
       }
     }
-  }, 2000); // Create new set every 2 seconds
+  }, 3500); // Create new set every 3.5 seconds
 }
 
 // Start animations immediately
