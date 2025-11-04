@@ -96,25 +96,49 @@ const messages = [
   'Every heartbeat whispers your name 💖',
   'you are SPECIAL!❤️',
   'Your smile lights up my day ✨',
-  'Love you more every moment 💜'
+  'Love you more every moment 💜',
+  'Forever Yours 💝',
+  'My heart beats for you 💓',
+  'You are my sunshine ☀️',
+  'My precious Najifa 💖',
+  'You mean everything to me 💕'
 ];
 
 function createBubble(message) {
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
   bubble.innerHTML = '❤️ ' + message + ' ❤️';
-  bubble.style.left = Math.random() * 60 + '%';
-  bubble.style.fontSize = `${Math.random() * 500 + 10}px`;
-  bubble.style.color = `hsl(${Math.random()*360}, 100%, 80%)`;
-  bubble.style.animationDuration = `${Math.random()*6 + 5}s`;
+  bubble.style.left = Math.random() * 80 + 10 + '%'; // Better spread across screen
+  bubble.style.fontSize = `${Math.random() * 20 + 15}px`; // More readable size
+  bubble.style.color = `hsl(${Math.random()*50 + 330}, 100%, 80%)`; // Pink-ish colors
+  
+  // Random animation duration between 8 and 15 seconds
+  const duration = Math.random() * 7 + 8;
+  bubble.style.animationDuration = `${duration}s`;
+  
   loveBubbles.appendChild(bubble);
-  setTimeout(() => bubble.remove(), 8000);
+  setTimeout(() => bubble.remove(), duration * 1000);
 }
 
+// Function to continuously create bubbles
+function startBubbleAnimation() {
+  // Create initial set of bubbles
+  messages.forEach((msg, index) => {
+    setTimeout(() => createBubble(msg), index * 1000);
+  });
+
+  // Continuously create new bubbles
+  setInterval(() => {
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    createBubble(randomMessage);
+  }, 2000); // Create new bubble every 2 seconds
+}
+
+// Start animations immediately
+animateHearts();
+startBubbleAnimation();
+
+// Hide button after click
 revealBtn.addEventListener('click', () => {
   revealBtn.style.display = 'none';
-  animateHearts();
-  messages.forEach((msg, index) => {
-    setTimeout(() => createBubble(msg), index * 3000);
-  });
 });
