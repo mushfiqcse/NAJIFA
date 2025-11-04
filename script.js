@@ -109,21 +109,21 @@ function createBubble(message) {
   bubble.className = 'bubble';
   bubble.innerHTML = '❤️ ' + message + ' ❤️';
   
-  // Full width positioning for less density
-  const position = Math.random() * 80 + 10; // Use 80% of screen width, 10% padding on each side
+  // Even more spread out positioning
+  const position = Math.random() * 70 + 15; // Use 70% of screen width, 15% padding on each side
   bubble.style.left = position + '%';
   
-  // Moderate font sizes for better readability
-  const fontSize = Math.random() * 20 + 16; // 16-36px for better readability
+  // Slightly larger font sizes for better visibility
+  const fontSize = Math.random() * 16 + 20; // 20-36px for better readability
   bubble.style.fontSize = `${fontSize}px`;
   
   // Simple colors without glow
   const hue = Math.random() * 40 + 330; // 330-370 (pink to red)
-  const lightness = Math.random() * 15 + 80; // 80-95% lightness for better visibility
+  const lightness = Math.random() * 10 + 85; // 85-95% lightness for even better visibility
   bubble.style.color = `hsl(${hue}, 100%, ${lightness}%)`;
   
-  // Longer animation duration for less density
-  const duration = Math.random() * 5 + 20; // 20-25 seconds
+  // Much longer animation duration
+  const duration = Math.random() * 8 + 25; // 25-33 seconds
   bubble.style.animationDuration = `${duration}s`;
   
   loveBubbles.appendChild(bubble);
@@ -137,12 +137,12 @@ function createBubble(message) {
 function startBubbleAnimation() {
   let currentIndex = 0;
 
-  // Create one message every 3 seconds
+  // Create one message every 8 seconds
   setInterval(() => {
     // Use messages in sequence for better distribution
     createBubble(messages[currentIndex]);
     currentIndex = (currentIndex + 1) % messages.length;
-  }, 3000); // Show one message every 3 seconds
+  }, 8000); // Show one message every 8 seconds
 }
 
 // Start animations immediately
