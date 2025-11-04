@@ -104,15 +104,7 @@ const messages = [
   'You mean everything to me 💕'
 ];
 
-// Keep track of active bubbles
-let activeBubbles = 0;
-const MAX_BUBBLES = 1; // Maximum number of bubbles allowed at once
-
 function createBubble(message) {
-  // Only create a new bubble if we're under the maximum
-  if (activeBubbles >= MAX_BUBBLES) return;
-  
-  activeBubbles++;
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
   bubble.innerHTML = '❤️ ' + message + ' ❤️';
@@ -130,44 +122,31 @@ function createBubble(message) {
   const lightness = Math.random() * 10 + 85; // 85-95% lightness for visibility
   bubble.style.color = `hsl(${hue}, 100%, ${lightness}%)`;
   
-  // Fixed animation duration for consistency
-  const duration = 15; // 15 seconds fixed duration
+  // Fixed animation duration
+  const duration = 8; // 8 seconds animation duration
   bubble.style.animationDuration = `${duration}s`;
   
   loveBubbles.appendChild(bubble);
   
-  // Remove bubble and decrease count when animation is done
+  // Remove bubble when animation is done
   setTimeout(() => {
-    bubble.style.opacity = '0';
-    setTimeout(() => {
-      bubble.remove();
-      activeBubbles--;
-    }, 1000);
+    bubble.remove();
   }, duration * 1000);
 }
 
 // Function to continuously create bubbles
 function startBubbleAnimation() {
   let currentIndex = 0;
-  let isFirstMessage = true;
-
-  function showNextMessage() {
-    if (activeBubbles < MAX_BUBBLES) {
-      createBubble(messages[currentIndex]);
-      currentIndex = (currentIndex + 1) % messages.length;
-      
-      // Schedule next message with proper timing
-      const delay = isFirstMessage ? 0 : 5000; // 5 seconds between messages
-      isFirstMessage = false;
-      setTimeout(showNextMessage, delay);
-    } else {
-      // If we couldn't create a bubble, try again in a second
-      setTimeout(showNextMessage, 1000);
-    }
-  }
-
-  // Start the animation chain
-  showNextMessage();
+  
+  // Create first bubble immediately
+  createBubble(messages[currentIndex]);
+  currentIndex = (currentIndex + 1) % messages.length;
+  
+  // Set up interval for subsequent bubbles
+  setInterval(() => {
+    createBubble(messages[currentIndex]);
+    currentIndex = (currentIndex + 1) % messages.length;
+  }, 5000); // Create new bubble every 5 seconds
 }
 
 // Start animations immediately
