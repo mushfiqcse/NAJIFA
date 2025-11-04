@@ -109,22 +109,21 @@ function createBubble(message) {
   bubble.className = 'bubble';
   bubble.innerHTML = '❤️ ' + message + ' ❤️';
   
-  // More spread out positioning with 4 columns
-  const column = Math.floor(Math.random() * 4); // 4 columns
-  const basePosition = (column * 25) + Math.random() * 20; // More space between columns
-  bubble.style.left = basePosition + '%';
+  // Full width positioning for less density
+  const position = Math.random() * 80 + 10; // Use 80% of screen width, 10% padding on each side
+  bubble.style.left = position + '%';
   
-  // Completely random font sizes between 12px and 48px
-  const fontSize = Math.random() * 36 + 12; // 12-48px random size
+  // Moderate font sizes for better readability
+  const fontSize = Math.random() * 20 + 16; // 16-36px for better readability
   bubble.style.fontSize = `${fontSize}px`;
   
   // Simple colors without glow
   const hue = Math.random() * 40 + 330; // 330-370 (pink to red)
-  const lightness = Math.random() * 20 + 75; // 75-95% lightness for better visibility
+  const lightness = Math.random() * 15 + 80; // 80-95% lightness for better visibility
   bubble.style.color = `hsl(${hue}, 100%, ${lightness}%)`;
   
-  // Slower animation for less density
-  const duration = Math.random() * 8 + 15; // 15-23 seconds
+  // Longer animation duration for less density
+  const duration = Math.random() * 5 + 20; // 20-25 seconds
   bubble.style.animationDuration = `${duration}s`;
   
   loveBubbles.appendChild(bubble);
@@ -136,23 +135,14 @@ function createBubble(message) {
 
 // Function to continuously create bubbles
 function startBubbleAnimation() {
-  // Create initial set of bubbles with more spacing
-  messages.forEach((msg, index) => {
-    setTimeout(() => createBubble(msg), index * 1200); // Slower initial spread
-  });
+  let currentIndex = 0;
 
-  // Create bubbles less frequently
+  // Create one message every 3 seconds
   setInterval(() => {
-    const unusedMessages = [...messages];
-    // Create 2 bubbles at different positions
-    for(let i = 0; i < 2; i++) {
-      if(unusedMessages.length > 0) {
-        const randomIndex = Math.floor(Math.random() * unusedMessages.length);
-        const message = unusedMessages.splice(randomIndex, 1)[0];
-        setTimeout(() => createBubble(message), i * 800); // More delay between bubbles
-      }
-    }
-  }, 3500); // Create new set every 3.5 seconds
+    // Use messages in sequence for better distribution
+    createBubble(messages[currentIndex]);
+    currentIndex = (currentIndex + 1) % messages.length;
+  }, 3000); // Show one message every 3 seconds
 }
 
 // Start animations immediately
