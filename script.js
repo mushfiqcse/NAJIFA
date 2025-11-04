@@ -109,21 +109,21 @@ function createBubble(message) {
   bubble.className = 'bubble';
   bubble.innerHTML = '❤️ ' + message + ' ❤️';
   
-  // Improved positioning for better spread
-  const column = Math.floor(Math.random() * 3); // 3 columns
-  const basePosition = (column * 33) + Math.random() * 20; // Base position with some randomness
+  // Improved positioning with 5 columns for more messages
+  const column = Math.floor(Math.random() * 5); // 5 columns
+  const basePosition = (column * 20) + Math.random() * 15; // Base position with some randomness
   bubble.style.left = basePosition + '%';
   
   // Consistent, readable font size
-  bubble.style.fontSize = `${Math.random() * 8 + 16}px`; // 16px to 24px
+  bubble.style.fontSize = `${Math.random() * 6 + 16}px`; // 16px to 22px
   
-  // Soft, romantic colors
-  const hue = Math.random() * 30 + 330; // 330-360 (pink to red)
+  // Soft, romantic colors with more variety
+  const hue = Math.random() * 50 + 320; // 320-370 (purple to red)
   const lightness = Math.random() * 20 + 70; // 70-90% lightness
   bubble.style.color = `hsl(${hue}, 100%, ${lightness}%)`;
   
-  // Longer duration for better visibility
-  const duration = Math.random() * 10 + 20; // 20-30 seconds
+  // Faster animation for more frequent appearance
+  const duration = Math.random() * 5 + 12; // 12-17 seconds
   bubble.style.animationDuration = `${duration}s`;
   
   loveBubbles.appendChild(bubble);
@@ -135,23 +135,23 @@ function createBubble(message) {
 
 // Function to continuously create bubbles
 function startBubbleAnimation() {
-  // Create initial set of bubbles with staggered starts
+  // Create initial set of bubbles rapidly
   messages.forEach((msg, index) => {
-    setTimeout(() => createBubble(msg), index * 2000);
+    setTimeout(() => createBubble(msg), index * 800); // Faster initial spread
   });
 
-  // Create sets of bubbles continuously
+  // Create bubbles more frequently
   setInterval(() => {
     const unusedMessages = [...messages];
-    // Create 3 bubbles at different positions
-    for(let i = 0; i < 3; i++) {
+    // Create 4 bubbles at different positions
+    for(let i = 0; i < 4; i++) {
       if(unusedMessages.length > 0) {
         const randomIndex = Math.floor(Math.random() * unusedMessages.length);
         const message = unusedMessages.splice(randomIndex, 1)[0];
-        setTimeout(() => createBubble(message), i * 500);
+        setTimeout(() => createBubble(message), i * 300); // Reduced delay between bubbles
       }
     }
-  }, 6000); // Create new set every 6 seconds
+  }, 2000); // Create new set every 2 seconds
 }
 
 // Start animations immediately
