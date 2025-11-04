@@ -146,7 +146,7 @@ function startBubbleAnimation() {
   setInterval(() => {
     createBubble(messages[currentIndex]);
     currentIndex = (currentIndex + 1) % messages.length;
-  }, 5000); // Create new bubble every 5 seconds
+  }, 1000); // Create new bubble every 5 seconds
 }
 
 // Start animations immediately
