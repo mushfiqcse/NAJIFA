@@ -23,52 +23,73 @@ body {
 
 .title {
   font-family: 'Great Vibes', cursive;
-  font-size: 3.5rem;
+  font-size: 4rem;
   margin-bottom: 20px;
   color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .animated-text {
   display: inline-block;
-  transition: transform 0.3s ease-out, color 0.3s ease-out;
+  transition: transform 0.5s ease-out, color 0.5s ease-out;
   cursor: pointer;
   position: relative;
   color: white;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+  padding: 0 2px;
 }
 
 .animated-text:hover {
-  transform: scale(1.5) rotate(15deg);
+  transform: scale(1.8) rotate(15deg);
   color: #ff1493;
-  text-shadow: 0 0 20px rgba(255, 20, 147, 0.8);
+  text-shadow: 
+    0 0 20px rgba(255, 20, 147, 0.8),
+    0 0 40px rgba(255, 20, 147, 0.4);
   animation: none;
+  z-index: 2;
 }
 
 .animated-text.active {
-  animation: pop 0.5s ease-out forwards;
+  animation: pop 1s ease-out forwards;
 }
 
 .animated-text:not(:hover) {
-  animation: float 3s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
 }
 
-.animated-text:nth-child(3n) {
+.animated-text:nth-child(4n) {
   animation-delay: 0s;
 }
 
-.animated-text:nth-child(3n+1) {
-  animation-delay: 0.2s;
+.animated-text:nth-child(4n+1) {
+  animation-delay: 1.5s;
 }
 
-.animated-text:nth-child(3n+2) {
-  animation-delay: 0.4s;
+.animated-text:nth-child(4n+2) {
+  animation-delay: 3s;
+}
+
+.animated-text:nth-child(4n+3) {
+  animation-delay: 4.5s;
 }
 
 @keyframes float {
   0%, 100% {
     transform: translateY(0) rotate(0deg);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  25% {
+    transform: translateY(-15px) rotate(5deg);
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
   }
   50% {
-    transform: translateY(-10px) rotate(5deg);
+    transform: translateY(0) rotate(0deg);
+    text-shadow: 0 0 15px rgba(255, 20, 147, 0.7);
+  }
+  75% {
+    transform: translateY(10px) rotate(-5deg);
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
   }
 }
 
@@ -76,23 +97,28 @@ body {
   0% { 
     transform: scale(1);
     color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   }
   50% { 
-    transform: scale(2) rotate(15deg);
+    transform: scale(2.2) rotate(15deg);
     color: #ff1493;
+    text-shadow: 
+      0 0 20px rgba(255, 20, 147, 0.8),
+      0 0 40px rgba(255, 20, 147, 0.4);
   }
   100% { 
     transform: scale(1);
     color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   }
 }
 
 @keyframes rainbow {
-  0% { color: #ff1493; text-shadow: 0 0 10px #ff1493; }
-  25% { color: #ff69b4; text-shadow: 0 0 10px #ff69b4; }
-  50% { color: #ff8c00; text-shadow: 0 0 10px #ff8c00; }
-  75% { color: #ff4500; text-shadow: 0 0 10px #ff4500; }
-  100% { color: #ff1493; text-shadow: 0 0 10px #ff1493; }
+  0% { color: #ff1493; text-shadow: 0 0 20px #ff1493, 0 0 40px rgba(255, 20, 147, 0.4); }
+  25% { color: #ff69b4; text-shadow: 0 0 20px #ff69b4, 0 0 40px rgba(255, 105, 180, 0.4); }
+  50% { color: #ff8c00; text-shadow: 0 0 20px #ff8c00, 0 0 40px rgba(255, 140, 0, 0.4); }
+  75% { color: #ff4500; text-shadow: 0 0 20px #ff4500, 0 0 40px rgba(255, 69, 0, 0.4); }
+  100% { color: #ff1493; text-shadow: 0 0 20px #ff1493, 0 0 40px rgba(255, 20, 147, 0.4); }
 }
 
 .animated-text.rainbow {

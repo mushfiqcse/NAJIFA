@@ -94,7 +94,7 @@ function animateHearts() {
 const messages = [
   'You make my world brighter 🌸',
   'Every heartbeat whispers your name 💖',
-  'Forever and always, it’s you ❤️',
+  'you are SPECIAL!❤️',
   'Your smile lights up my day ✨',
   'Love you more every moment 💜'
 ];
