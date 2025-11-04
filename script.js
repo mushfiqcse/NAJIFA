@@ -1,54 +1,61 @@
 /* script.js */
-const revealBtn = document.getElementById('revealBtn');
-const giftMessage = document.getElementById('giftMessage');
-const canvas = document.getElementById('confettiCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-function random(min, max) {
-  return Math.random() * (max - min) + min;
 }
 
-const confetti = [];
-for (let i = 0; i < 150; i++) {
-  confetti.push({
-    x: random(0, canvas.width),
-    y: random(0, canvas.height),
-    r: random(2, 6),
-    c: `hsl(${random(280, 330)}, 100%, 70%)`,
-    d: random(2, 5)
-  });
+
+function drawHearts() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+hearts.forEach(h => {
+ctx.beginPath();
+ctx.arc(h.x, h.y, h.r, 0, Math.PI * 2);
+ctx.fillStyle = h.c;
+ctx.fill();
+});
 }
 
-function drawConfetti() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  confetti.forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = p.c;
-    ctx.fill();
-  });
+
+function updateHearts() {
+hearts.forEach(h => {
+h.y -= h.d;
+if (h.y + h.r < 0) {
+h.y = canvas.height + random(50, 100);
+h.x = random(0, canvas.width);
+}
+});
 }
 
-function updateConfetti() {
-  confetti.forEach(p => {
-    p.y += p.d;
-    if (p.y > canvas.height) {
-      p.y = 0;
-      p.x = random(0, canvas.width);
-    }
-  });
+
+function animateHearts() {
+drawHearts();
+updateHearts();
+requestAnimationFrame(animateHearts);
 }
 
-function animateConfetti() {
-  drawConfetti();
-  updateConfetti();
-  requestAnimationFrame(animateConfetti);
-}
+
+const messages = [
+'You make my world brighter 🌸',
+'Every heartbeat whispers your name 💖',
+'Forever and always, it’s you ❤️',
+'Your smile lights up my day ✨',
+'Love you more every moment 💜'
+];
+
 
 revealBtn.addEventListener('click', () => {
-  giftMessage.style.display = 'block';
-  revealBtn.style.display = 'none';
-  animateConfetti();
+giftMessage.style.display = 'block';
+revealBtn.style.display = 'none';
+loveMessages.style.display = 'block';
+animateHearts();
+
+
+let index = 0;
+function showNextMessage() {
+if (index < messages.length) {
+const p = document.createElement('p');
+p.textContent = messages[index];
+loveMessages.appendChild(p);
+index++;
+setTimeout(showNextMessage, 1000);
+}
+}
+showNextMessage();
 });
