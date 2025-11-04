@@ -104,45 +104,70 @@ const messages = [
   'You mean everything to me 💕'
 ];
 
+// Keep track of active bubbles
+let activeBubbles = 0;
+const MAX_BUBBLES = 1; // Maximum number of bubbles allowed at once
+
 function createBubble(message) {
+  // Only create a new bubble if we're under the maximum
+  if (activeBubbles >= MAX_BUBBLES) return;
+  
+  activeBubbles++;
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
   bubble.innerHTML = '❤️ ' + message + ' ❤️';
   
-  // Even more spread out positioning
-  const position = Math.random() * 70 + 15; // Use 70% of screen width, 15% padding on each side
+  // Ensure even distribution across screen width
+  const position = Math.random() * 60 + 20; // Use 60% of screen width, 20% padding on sides
   bubble.style.left = position + '%';
   
-  // Slightly larger font sizes for better visibility
-  const fontSize = Math.random() * 16 + 20; // 20-36px for better readability
+  // Consistent font size for better readability
+  const fontSize = 24; // Fixed size for consistency
   bubble.style.fontSize = `${fontSize}px`;
   
   // Simple colors without glow
   const hue = Math.random() * 40 + 330; // 330-370 (pink to red)
-  const lightness = Math.random() * 10 + 85; // 85-95% lightness for even better visibility
+  const lightness = Math.random() * 10 + 85; // 85-95% lightness for visibility
   bubble.style.color = `hsl(${hue}, 100%, ${lightness}%)`;
   
-  // Much longer animation duration
-  const duration = Math.random() * 8 + 25; // 25-33 seconds
+  // Fixed animation duration for consistency
+  const duration = 15; // 15 seconds fixed duration
   bubble.style.animationDuration = `${duration}s`;
   
   loveBubbles.appendChild(bubble);
+  
+  // Remove bubble and decrease count when animation is done
   setTimeout(() => {
     bubble.style.opacity = '0';
-    setTimeout(() => bubble.remove(), 1000);
+    setTimeout(() => {
+      bubble.remove();
+      activeBubbles--;
+    }, 1000);
   }, duration * 1000);
 }
 
 // Function to continuously create bubbles
 function startBubbleAnimation() {
   let currentIndex = 0;
+  let isFirstMessage = true;
 
-  // Create one message every 8 seconds
-  setInterval(() => {
-    // Use messages in sequence for better distribution
-    createBubble(messages[currentIndex]);
-    currentIndex = (currentIndex + 1) % messages.length;
-  }, 8000); // Show one message every 8 seconds
+  function showNextMessage() {
+    if (activeBubbles < MAX_BUBBLES) {
+      createBubble(messages[currentIndex]);
+      currentIndex = (currentIndex + 1) % messages.length;
+      
+      // Schedule next message with proper timing
+      const delay = isFirstMessage ? 0 : 16000; // 16 seconds between messages
+      isFirstMessage = false;
+      setTimeout(showNextMessage, delay);
+    } else {
+      // If we couldn't create a bubble, try again in a second
+      setTimeout(showNextMessage, 1000);
+    }
+  }
+
+  // Start the animation chain
+  showNextMessage();
 }
 
 // Start animations immediately
