@@ -1,6 +1,31 @@
 const revealBtn = document.getElementById('revealBtn');
 const loveBubbles = document.getElementById('loveBubbles');
 const canvas = document.getElementById('heartCanvas');
+const animatedTexts = document.querySelectorAll('.animated-text');
+
+// Add interactive effects to the text
+animatedTexts.forEach(text => {
+  text.addEventListener('click', function() {
+    this.classList.add('active');
+    setTimeout(() => this.classList.remove('active'), 500);
+  });
+
+  text.addEventListener('mouseover', function() {
+    const randomEffect = Math.random();
+    if (randomEffect > 0.5) {
+      this.classList.add('rainbow');
+      setTimeout(() => this.classList.remove('rainbow'), 2000);
+    }
+  });
+
+  // Add continuous subtle movement
+  let angle = 0;
+  setInterval(() => {
+    angle += 0.1;
+    const yOffset = Math.sin(angle) * 3;
+    text.style.transform = `translateY(${yOffset}px)`;
+  }, 50);
+});
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
