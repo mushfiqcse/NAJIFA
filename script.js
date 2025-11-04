@@ -157,7 +157,7 @@ function startBubbleAnimation() {
       currentIndex = (currentIndex + 1) % messages.length;
       
       // Schedule next message with proper timing
-      const delay = isFirstMessage ? 0 : 5000; // 16 seconds between messages
+      const delay = isFirstMessage ? 0 : 5000; // 5 seconds between messages
       isFirstMessage = false;
       setTimeout(showNextMessage, delay);
     } else {
