@@ -123,7 +123,7 @@ function createBubble(message) {
   bubble.style.color = `hsl(${hue}, 100%, ${lightness}%)`;
   
   // Fixed animation duration
-  const duration = 4; // 8 seconds animation duration
+  const duration = 3; // 3 seconds animation duration
   bubble.style.animationDuration = `${duration}s`;
   
   loveBubbles.appendChild(bubble);
@@ -146,7 +146,7 @@ function startBubbleAnimation() {
   setInterval(() => {
     createBubble(messages[currentIndex]);
     currentIndex = (currentIndex + 1) % messages.length;
-  }, 1000); // Create new bubble every 5 seconds
+  }, 500); // Create new bubble every 0.5 seconds
 }
 
 // Start animations immediately
