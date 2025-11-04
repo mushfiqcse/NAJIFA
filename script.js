@@ -123,7 +123,7 @@ function createBubble(message) {
   bubble.style.color = `hsl(${hue}, 100%, ${lightness}%)`;
   
   // Fixed animation duration
-  const duration = 8; // 8 seconds animation duration
+  const duration = 4; // 8 seconds animation duration
   bubble.style.animationDuration = `${duration}s`;
   
   loveBubbles.appendChild(bubble);
