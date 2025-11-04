@@ -1,65 +1,89 @@
-/* style.css */
-.title {
-font-family: 'Great Vibes', cursive;
-font-size: 3rem;
-margin-bottom: 20px;
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  text-align: center;
+  overflow: hidden;
 }
 
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  position: relative;
+}
+
+.title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
 
 .photo {
-width: 200px;
-height: 200px;
-object-fit: cover;
-border-radius: 50%;
-border: 4px solid white;
-margin-bottom: 20px;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid white;
+  margin-bottom: 20px;
 }
-
 
 button {
-background: white;
-color: #8b5cf6;
-border: none;
-padding: 12px 24px;
-border-radius: 8px;
-font-size: 1rem;
-font-weight: bold;
-cursor: pointer;
-transition: all 0.3s ease;
+  background: white;
+  color: #8b5cf6;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
-
 
 button:hover {
-background: #f9f5ff;
-transform: scale(1.05);
+  background: #f9f5ff;
+  transform: scale(1.05);
 }
 
-
-#giftMessage {
-font-size: 1.8rem;
-margin-top: 25px;
-display: none;
+#loveBubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 20; /* above hearts */
 }
 
-
-#loveMessages {
-margin-top: 20px;
-font-size: 1.3rem;
-display: none;
+.bubble {
+  position: absolute;
+  font-size: 20px;
+  user-select: none;
+  pointer-events: none;
+  animation: floatUp linear forwards;
 }
 
-
-.hidden {
-display: none;
+@keyframes floatUp {
+  0% { transform: translateY(100vh) scale(1); opacity: 1; }
+  100% { transform: translateY(-50px) scale(0.8); opacity: 0; }
 }
-
 
 #heartCanvas {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-pointer-events: none;
-z-index: 5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10; /* below message bubbles */
 }
+
