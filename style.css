@@ -187,7 +187,7 @@ button:hover {
   opacity: 0;
   font-weight: bold;
   font-size: clamp(14px, 4vw, 24px);
-  max-width: 120vw;
+  max-width: 200vw;
   overflow-wrap: break-word;
   word-break: break-word;
   padding: 4px 14px;
