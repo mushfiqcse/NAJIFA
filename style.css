@@ -182,15 +182,15 @@ button:hover {
   user-select: none;
   pointer-events: none;
   animation: floatUp linear forwards;
-  white-space: nowrap;
+  white-space: normal;
   z-index: 30;
   opacity: 0;
   font-weight: bold;
   font-size: clamp(14px, 4vw, 24px);
-  max-width: 90vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 10px;
+  max-width: 95vw;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  padding: 4px 14px;
 }
 
 @keyframes floatUp {
@@ -230,7 +230,8 @@ button:hover {
   
   .bubble {
     font-size: clamp(12px, 3.5vw, 18px);
-    max-width: 85vw;
+    max-width: 98vw;
+    padding: 6px 10px;
   }
   
   .animated-text {
@@ -260,8 +261,9 @@ button:hover {
   }
   
   .bubble {
-    font-size: clamp(10px, 3vw, 16px);
-    max-width: 80vw;
+    font-size: clamp(10px, 3vw, 15px);
+    max-width: 98vw;
+    padding: 8px 6px;
   }
 }
 
